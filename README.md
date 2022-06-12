@@ -1,2 +1,2 @@
-# SOS
-Sistema de Ordem de Serviço
+# SOSEPE
+Sistema de Ordem de Serviço para Empresas

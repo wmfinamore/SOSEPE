@@ -37,6 +37,8 @@ INSTALLED_APPS = [
 
     # App's
     'accounts',
+    'core',
+    'clientes',
 
 ]
 

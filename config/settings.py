@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 
     # Terceiros
     'debug_toolbar',
+    'import_export',
 
     # App's
     'accounts',

@@ -9,6 +9,7 @@ django-debug-toolbar = "*"
 psycopg2 = "*"
 environs = "*"
 django-import-export = "*"
+django-simple-history = "*"
 
 [dev-packages]
 

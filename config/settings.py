@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     # Terceiros
     'debug_toolbar',
     'import_export',
+    'simple_history',
 
     # App's
     'accounts',
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 

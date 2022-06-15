@@ -7,7 +7,7 @@ class Auditoria(models.Model):
     hora_inclusao = models.DateTimeField(auto_now_add=True)
     data_alteracao = models.DateField(auto_now=True)
     hora_alteracao = models.DateTimeField(auto_now=True)
-    history = HistoricalRecords()
+    history = HistoricalRecords(inherit=True)
 
     class Meta:
         abstract = True

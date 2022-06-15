@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'import_export',
     'simple_history',
+    'django_cpf_cnpj',
 
     # App's
     'accounts',

@@ -10,6 +10,7 @@ psycopg2 = "*"
 environs = "*"
 django-import-export = "*"
 django-simple-history = "*"
+django-cpf-cnpj = "*"
 
 [dev-packages]
 

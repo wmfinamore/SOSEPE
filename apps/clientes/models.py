@@ -10,8 +10,8 @@ class Cliente(Auditoria):
 
     def __str__(self):
         if self.cpf:
-            return self.cpf + " - " + self.nome
+            return str(self.cpf) + " - " + str(self.nome)
         elif self.cnpj:
-            return self.cnpj + " - " + self.nome
+            return str(self.cnpj) + " - " + str(self.nome)
         else:
-            return self.nome
+            return str(self.nome)

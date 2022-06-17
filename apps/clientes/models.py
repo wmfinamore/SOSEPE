@@ -3,10 +3,11 @@ from apps.core.models import Auditoria
 from django_cpf_cnpj.fields import CPFField, CNPJField
 
 
+# TODO: Definir Verbose Names
 class Cliente(Auditoria):
-    nome = models.CharField(max_length=250, null=True, blank=True)
-    cpf = CPFField(masked=True, null=True, blank=True)
-    cnpj = CNPJField(masked=True, null=True, blank=True)
+    nome = models.CharField(max_length=250, null=True, blank=True, verbose_name='Nome')
+    cpf = CPFField(masked=True, null=True, blank=True, verbose_name='CPF')
+    cnpj = CNPJField(masked=True, null=True, blank=True, verbose_name='CNPJ')
 
     def __str__(self):
         if self.cpf:

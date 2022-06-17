@@ -3,8 +3,18 @@ from apps.core.models import Auditoria
 from apps.clientes.models import Cliente
 
 
-# TODO: definir verbose names
 # TODO: Criar model para Status do Pedido
+class StatusOrdemServico(models.Model):
+    status_ordem_servico = models.CharField(max_length=30, verbose_name='Status de O.S.', unique=True)
+
+    def __str__(self):
+        return str(self.id) + ' - ' + str(self.status_ordem_servico)
+
+    class Meta:
+        verbose_name = 'Status de O.S.'
+        verbose_name_plural = 'Status de O.S.'
+
+
 class OrdemServico(Auditoria):
     numero = models.PositiveBigIntegerField(null=True, blank=True, verbose_name='Número da O.S.')
     pedido = models.CharField(max_length=50, null=True, blank=True, verbose_name='Número do pedido')

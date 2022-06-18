@@ -22,7 +22,8 @@ class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
     form = OrdermServicoForm
     readonly_fields = ['valor_total', 'situacao']
     list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega', 'situacao_os']
-    search_fields = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']
+    search_fields = ['numero', 'pedido', 'cliente__nome', 'cliente__cpf', 'cliente__cnpj',  'descricao', 'data_entrega']
+    list_filter = ['status', 'cliente']
     autocomplete_fields = ['cliente']
     fieldsets = (
         ('Identificação', {

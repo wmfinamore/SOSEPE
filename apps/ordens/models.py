@@ -1,6 +1,8 @@
 from django.db import models
 from apps.core.models import Auditoria
 from apps.clientes.models import Cliente
+from datetime import date
+from config.settings import RISCO
 
 
 # TODO: Criar model para Status do Pedido
@@ -36,6 +38,27 @@ class OrdemServico(Auditoria):
     @property
     def valor_total(self):
         return self.valor + self.imposto
+
+    @property
+    def situacao(self):
+        if self.data_entrega is not None \
+                and self.data_entrega_real is not None \
+                and self.data_entrega_real > self.data_entrega:
+            return 'Entregue com Atraso'
+        elif self.data_entrega is not None \
+                and self.data_entrega_real is not None \
+                and self.data_entrega_real <= self.data_entrega:
+            return 'Entregue no Prazo'
+        elif self.data_entrega is not None \
+                and self.data_entrega_real is None \
+                and self.data_entrega < date.today():
+            return 'Pedido Atrasado'
+        elif self.data_entrega is not None \
+                and self.data_entrega_real is None \
+                and (self.data_entrega - date.today()).days <= RISCO:
+            return 'Em risco de Atraso'
+        else:
+            return 'Em andamento'
 
     class Meta:
         ordering = ['data_entrega']

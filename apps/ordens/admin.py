@@ -1,6 +1,6 @@
 from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
-from .models import OrdemServico
+from .models import OrdemServico, StatusOrdemServico
 
 
 class OrdemServicoAdmin(SimpleHistoryAdmin):
@@ -10,3 +10,4 @@ class OrdemServicoAdmin(SimpleHistoryAdmin):
 
 
 admin.site.register(OrdemServico, OrdemServicoAdmin)
+admin.site.register(StatusOrdemServico)

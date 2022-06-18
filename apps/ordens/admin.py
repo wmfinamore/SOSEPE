@@ -23,6 +23,7 @@ class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
     list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']
     search_fields = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']
     autocomplete_fields = ['cliente']
+    readonly_fields = ['valor_total']
     fieldsets = (
         ('Identificação', {
             'fields': (
@@ -33,7 +34,7 @@ class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
         ('Detalhes da O.S.', {
             'fields': (
                 ('descricao', 'quantidade'),
-                ('valor', 'imposto'),
+                ('valor', 'imposto', 'valor_total'),
                 ('observacao',)
             )
         }),

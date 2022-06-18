@@ -29,3 +29,7 @@ if settings.DEBUG:
     urlpatterns = [
                       path('__debug__', include(debug_toolbar.urls))
                   ] + urlpatterns
+
+admin.site.site_header = 'SOSEPE - Sistema de Ordens de Serviço para Empresas'
+admin.site.index_title = 'Administração'
+admin.site.site_title = 'SOSEPE'

@@ -2,9 +2,23 @@ from django.contrib import admin
 from simple_history.admin import SimpleHistoryAdmin
 from .models import OrdemServico, StatusOrdemServico
 from .forms import OrdermServicoForm
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
 
-class OrdemServicoAdmin(SimpleHistoryAdmin):
+class OrdemServicoResource(resources.ModelResource):
+
+    class Meta:
+        model = OrdemServico
+        import_id_fields = ('pedido',)
+        fields = ('pedido', 'data_pedido', 'cliente', 'status', 'descricao', 'quantidade')
+        widgets = {
+            'data_pedido': {'format': '%d/%m/%Y'},
+        }
+
+
+class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
+    resource_class = OrdemServicoResource
     form = OrdermServicoForm
     list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']
     search_fields = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']

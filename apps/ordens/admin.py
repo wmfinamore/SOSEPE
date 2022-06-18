@@ -5,6 +5,32 @@ from .models import OrdemServico, StatusOrdemServico
 from .forms import OrdermServicoForm
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from django.utils.translation import gettext_lazy as _
+
+
+class SituacaoListFilter(admin.SimpleListFilter):
+    title = _('Situação da O.S.')
+    parameter_name = 'situacao'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('Entregue com Atraso', _('Entregue com Atraso')),
+            ('Entregue no Prazo', _('Entregue no Prazo')),
+            ('Pedido Atrasado', _('Pedido Atrasado')),
+            ('Em risco de Atraso', _('Em risco de Atraso')),
+            ('Em andamento', _('Em andamento')),
+        )
+
+    def queryset(self, request, queryset):
+        ordens_servicos = OrdemServico.objects.all()
+        data = []
+        for ordem_servico in ordens_servicos:
+            if ordem_servico.situacao == self.value():
+                data.append(ordem_servico.id)
+        if data:
+            return queryset.filter(id__in=data)
+        else:
+            return queryset.all()
 
 
 class OrdemServicoResource(resources.ModelResource):
@@ -23,7 +49,7 @@ class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
     readonly_fields = ['valor_total', 'situacao']
     list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega', 'situacao_os']
     search_fields = ['numero', 'pedido', 'cliente__nome', 'cliente__cpf', 'cliente__cnpj',  'descricao', 'data_entrega']
-    list_filter = ['status', 'cliente']
+    list_filter = ['status', 'cliente', SituacaoListFilter]
     autocomplete_fields = ['cliente']
     fieldsets = (
         ('Identificação', {

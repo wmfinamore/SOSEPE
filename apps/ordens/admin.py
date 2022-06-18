@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from simple_history.admin import SimpleHistoryAdmin
 from .models import OrdemServico, StatusOrdemServico
-from .forms import OrdermServicoForm
+from .forms import OrdemServicoForm
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin
 from django.utils.translation import gettext_lazy as _
@@ -45,7 +45,7 @@ class OrdemServicoResource(resources.ModelResource):
 
 class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
     resource_class = OrdemServicoResource
-    form = OrdermServicoForm
+    form = OrdemServicoForm
     readonly_fields = ['valor_total', 'situacao']
     list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega', 'situacao_os']
     search_fields = ['numero', 'pedido', 'cliente__nome', 'cliente__cpf', 'cliente__cnpj',  'descricao', 'data_entrega']

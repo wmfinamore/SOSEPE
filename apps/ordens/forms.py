@@ -2,13 +2,13 @@ from django import forms
 from .models import OrdemServico
 
 
-class OrdermServicoForm(forms.ModelForm):
+class OrdemServicoForm(forms.ModelForm):
     data_pedido = forms.DateField(widget=forms.widgets.TextInput(attrs={'type': 'date'}), required=False)
     data_entrega = forms.DateField(widget=forms.widgets.TextInput(attrs={'type': 'date'}), required=False)
     data_entrega_real = forms.DateField(widget=forms.widgets.TextInput(attrs={'type': 'date'}), required=False)
 
     def __init__(self, *args, **kwargs):
-        super(OrdermServicoForm, self).__init__(*args, **kwargs)
+        super(OrdemServicoForm, self).__init__(*args, **kwargs)
 
         if self.instance.id:
             if self.instance.situacao == 'Entregue com Atraso':

@@ -20,14 +20,14 @@ class OrdemServicoResource(resources.ModelResource):
 class OrdemServicoAdmin(SimpleHistoryAdmin, ImportExportModelAdmin):
     resource_class = OrdemServicoResource
     form = OrdermServicoForm
-    list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']
+    readonly_fields = ['valor_total', 'situacao']
+    list_display = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega', 'situacao']
     search_fields = ['numero', 'pedido', 'cliente', 'descricao', 'data_entrega']
     autocomplete_fields = ['cliente']
-    readonly_fields = ['valor_total']
     fieldsets = (
         ('Identificação', {
             'fields': (
-                ('numero', 'pedido', 'status'),
+                ('numero', 'pedido', 'status', 'situacao'),
                 ('cliente', 'data_pedido', 'data_entrega'),
             )
         }),

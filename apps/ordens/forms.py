@@ -1,5 +1,4 @@
 from django import forms
-from .models import OrdemServico
 
 
 class OrdermServicoForm(forms.ModelForm):

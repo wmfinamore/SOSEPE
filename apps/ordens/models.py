@@ -20,6 +20,7 @@ class OrdemServico(Auditoria):
     pedido = models.CharField(max_length=50, null=True, blank=True, verbose_name='Número do pedido')
     data_pedido = models.DateField(null=True, blank=True, verbose_name='data do pedido')
     cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.PROTECT)
+    status = models.ForeignKey(StatusOrdemServico,on_delete=models.PROTECT, verbose_name='Status da O.S.')
     descricao = models.CharField(max_length=250, null=True, blank=True, verbose_name='Descrição')
     quantidade = models.PositiveIntegerField(default=0)
     valor = models.DecimalField(max_digits=20, decimal_places=2, default=0.0, verbose_name='R$')

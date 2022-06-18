@@ -4,7 +4,7 @@ from .models import Cliente
 
 
 class ClienteAdmin(SimpleHistoryAdmin):
-    list_display = ['nome', 'cpf', 'cnpj']
+    list_display = ['id', 'nome', 'cpf', 'cnpj']
     search_fields = ['nome', 'cpf', 'cnpj']
 
 

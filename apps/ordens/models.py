@@ -2,6 +2,8 @@ from django.db import models
 from apps.core.models import Auditoria
 from apps.clientes.models import Cliente
 from datetime import date
+from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 from config.settings import RISCO
 
 
@@ -59,6 +61,16 @@ class OrdemServico(Auditoria):
             return 'Em risco de Atraso'
         else:
             return 'Em andamento'
+
+    def clean(self):
+        if self.data_entrega is not None \
+                and self.data_pedido is not None \
+                and self.data_entrega < self.data_pedido:
+            raise ValidationError(_('Data de entrega não pode ser menor que a data do pedido.'))
+        if self.data_entrega_real is not None \
+                and self.data_pedido is not None \
+                and self.data_entrega_real < self.data_pedido:
+            raise ValidationError(_('Data de entrega real não pode ser menor que a data do pedido.'))
 
     class Meta:
         ordering = ['data_entrega']

@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from config.settings import RISCO
 
 
-# TODO: Criar model para Status do Pedido
+# TODO: Criar incremento automático para número da O.S. com transação
 class StatusOrdemServico(models.Model):
     status_ordem_servico = models.CharField(max_length=30, verbose_name='Status de O.S.', unique=True)
 
@@ -71,6 +71,17 @@ class OrdemServico(Auditoria):
                 and self.data_pedido is not None \
                 and self.data_entrega_real < self.data_pedido:
             raise ValidationError(_('Data de entrega real não pode ser menor que a data do pedido.'))
+
+    def save(self, *args, **kwargs):
+        if self.id:
+            pass
+        else:
+            ordem = OrdemServico.objects.all().order_by('-numero').first()
+            if ordem:
+                self.numero = int(ordem.numero) + 1
+            else:
+                self.numero = 1
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['data_entrega']

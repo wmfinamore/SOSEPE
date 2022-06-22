@@ -5,7 +5,6 @@ from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 
-# TODO: Implementar validação para usar apenas CPF ou CNPJ
 class Cliente(Auditoria):
     nome = models.CharField(max_length=250, null=True, blank=True, verbose_name='Nome')
     cpf = CPFField(masked=True, null=True, blank=True, verbose_name='CPF')
@@ -26,3 +25,6 @@ class Cliente(Auditoria):
         if self.cpf is None \
                 and self.cnpj is None:
             raise ValidationError(_('Defina pelo menos um documento para o cliente: CPF ou CNPJ'))
+
+    class Meta:
+        ordering = ['nome']

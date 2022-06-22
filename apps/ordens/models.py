@@ -20,7 +20,7 @@ class StatusOrdemServico(models.Model):
 
 
 class OrdemServico(Auditoria):
-    numero = models.PositiveBigIntegerField(null=True, blank=True, verbose_name='Número da O.S.')
+    numero = models.PositiveBigIntegerField(null=True, blank=True, verbose_name='Número da O.S.', editable=False)
     pedido = models.CharField(max_length=50, null=True, blank=True, verbose_name='Número do pedido')
     data_pedido = models.DateField(null=True, blank=True, verbose_name='data do pedido')
     cliente = models.ForeignKey(Cliente, null=True, blank=True, on_delete=models.PROTECT)
